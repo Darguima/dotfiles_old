@@ -1,0 +1,10 @@
+# /usr/bin/bash
+
+bold=$(tput bold)
+normal=$(tput sgr0)
+
+
+echo "
+Welcome to my ${bold}.dotfiles${normal}.
+  by ${bold}Darguima${normal}
+"
