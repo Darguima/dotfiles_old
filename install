@@ -1,10 +1,28 @@
 # /usr/bin/bash
 
+ROOT_DIR=$(pwd)/$(dirname "${BASH_SOURCE[0]:-$0}")
+LOGFILE=${ROOT_DIR}/log.txt
+TEMPPATH=${ROOT_DIR}/temp
+
+cd $ROOT_DIR
+
 bold=$(tput bold)
 normal=$(tput sgr0)
 
+. ${ROOT_DIR}/scripts/utils.sh
+. ${ROOT_DIR}/scripts/install_packages.sh
 
-echo "
+clear_log
+
+# With this command in the next 15 minutes the sudo password will not be asked again
+# And the user don't change to root
+sudo true
+
+print "
 Welcome to my ${bold}.dotfiles${normal}.
   by ${bold}Darguima${normal}
 "
+
+install_packages
+
+rm -rf $TEMPPATH

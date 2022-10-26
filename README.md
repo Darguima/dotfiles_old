@@ -16,3 +16,5 @@ Run the install script:
 ```
 ./install
 ```
+
+You can read a complete log in `log.txt`.
