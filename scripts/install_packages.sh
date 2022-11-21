@@ -44,15 +44,16 @@ function install_packages () {
   install_yay
   update_yay
 
-  for PKG in "${PKG[@]}"
-  do 
-    install_package $PKG
+  # Run all sub folders with file `install.sh`
+  local subDirs=$(find ./packages -maxdepth 1 -mindepth 1 -type d -print | sed -e 's/.\///')
+
+  for dir in $subDirs; do
+    if [ -f "$dir/install.sh" ]; then
+      . "${dir}"/install.sh
+      # will call `install_package` function
+    fi
   done
 }
-
-# GROUP=(
-#   "package command"
-# )
 
 PKG=(
   grub

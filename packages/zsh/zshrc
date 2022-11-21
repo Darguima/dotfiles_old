@@ -1,0 +1,79 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Android Studio =======================================================
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk/
+export ANDROID_HOME=~/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+export PATH=$PATH:~/Android/android-studio/bin
+
+alias tele='emulator -avd tele'
+alias tablet='emulator -avd tablet'
+
+alias dotfiles='./Code/dotfiles/install'
+
+. $HOME/.asdf/asdf.sh
+# ======================================================================
+
+# Alias ================================================================
+alias _='sudo'
+alias la='ls -la'
+alias keyMouse='setxkbmap -option keypad:pointerkeys'
+
+alias init_mic0='pacmd load-module module-alsa-source device=hw:Loopback,1,0'
+alias init_mic1='pacmd load-module module-alsa-source device=hw:Loopback,1,1'
+alias kill_mics='pacmd unload-module module-alsa-source'
+alias init_cam='echo "vm" | env ANDROID_SERIAL=A3201809023158 droidcam-cli -a -v -dev=/dev/video0 adb 4747'
+alias mic_test='LBID=$(pactl load-module module-loopback); sleep 1; pactl unload-module $LBID'
+
+# To get the sink name > pacmd list-sinks
+alias changeToHeadphones='pacmd set-sink-port alsa_output.pci-0000_09_00.4.analog-stereo analog-output-headphones'
+alias changeToSpeakers='pacmd set-sink-port alsa_output.pci-0000_09_00.4.analog-stereo analog-output-lineout'
+# ======================================================================
+
+# Other stuffs =========================================================
+export EDITOR='vim'
+# ======================================================================
+
+# ZSH Config ===========================================================
+export ZSH="$HOME/.oh-my-zsh"
+
+source $ZSH/themes/powerlevel10k/powerlevel10k.zsh-theme
+# ZSH_THEME="bira"
+
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+plugins=(
+	git
+	zsh-autosuggestions
+)
+
+source $ZSH/oh-my-zsh.sh
+
+# ======================================================================
+
+# On Gnome Delete this:
+# Don't forget override the systemctl unit
+export SSH_AUTH_SOCK=/run/user/$(id -u)/keyring/ssh
+# ======================================================================
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+#[ -f "/home/darguima/.ghcup/env" ] && source "/home/darguima/.ghcup/env" # ghcup-env
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+#[ -f "/home/darguima/.ghcup/env" ] && source "/home/darguima/.ghcup/env" # ghcup-env
+[ -f "/home/darguima/.ghcup/env" ] && source "/home/darguima/.ghcup/env" # ghcup-env

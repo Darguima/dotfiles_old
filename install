@@ -2,15 +2,15 @@
 
 ROOT_DIR=$(pwd)/$(dirname "${BASH_SOURCE[0]:-$0}")
 LOGFILE=${ROOT_DIR}/log.txt
-TEMPPATH=${ROOT_DIR}/temp
+TEMPPATH=${ROOT_DIR}/temp 
 
 cd $ROOT_DIR
 
 bold=$(tput bold)
 normal=$(tput sgr0)
 
-. ${ROOT_DIR}/scripts/utils.sh
-. ${ROOT_DIR}/scripts/install_packages.sh
+. "$ROOT_DIR"/scripts/utils.sh
+. "$ROOT_DIR"/scripts/install_packages.sh
 
 clear_log
 
