@@ -1,8 +1,9 @@
 # /usr/bin/bash
 
-ROOT_DIR=$(pwd)/$(dirname "${BASH_SOURCE[0]:-$0}")
-LOGFILE=${ROOT_DIR}/log.txt
-TEMPPATH=${ROOT_DIR}/temp 
+ROOT_DIR="$(pwd)/$(dirname "${BASH_SOURCE[0]:-$0}")"
+LOGFILE="${ROOT_DIR}/log.txt"
+TEMPPATH="${ROOT_DIR}/temp"
+DOTFILES_FOLDER="$HOME/.dotfiles"
 
 cd $ROOT_DIR
 
@@ -23,6 +24,10 @@ Welcome to my ${bold}.dotfiles${normal}.
   by ${bold}Darguima${normal}
 "
 
+print "Linking '$DOTFILES_FOLDER' to this folder.\n"
+symlink $ROOT_DIR $DOTFILES_FOLDER
+
 install_packages
 
 rm -rf $TEMPPATH
+print "\nBye\n"

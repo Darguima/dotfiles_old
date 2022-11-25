@@ -9,10 +9,10 @@ function install_yay() {
     sudo pacman -S --needed --noconfirm git base-devel &>> $LOGFILE
 
     reprint_last_line "\t-> Installing ${bold}yay${normal} (git clone)"
-    git clone https://aur.archlinux.org/yay.git $TEMPPATH/yay &>> $LOGFILE
+    git clone https://aur.archlinux.org/yay.git "$TEMPPATH/yay" &>> $LOGFILE
 
     reprint_last_line "\t-> Installing ${bold}yay${normal} (makepkg)"
-    cd $TEMPPATH/yay &>> $LOGFILE
+    cd "$TEMPPATH/yay" &>> $LOGFILE
     makepkg -si --noconfirm &>> $LOGFILE
 
   else
@@ -55,7 +55,7 @@ function install_packages () {
   done
 }
 
-PKG=(
+packages=(
   grub
   efibootmgr
   xorg-server
