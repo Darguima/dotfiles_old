@@ -11,6 +11,7 @@ install_package "xorg-xrandr"
 install_package "arandr"
 
 git clone https://github.com/deficient/battery-widget.git $HOME/.config/awesome/battery-widget &>> $LOGFILE
+git clone https://github.com/deficient/brightness $HOME/.config/awesome/battery-widget &>> $LOGFILE
 
 install_package $currentPackage
 
