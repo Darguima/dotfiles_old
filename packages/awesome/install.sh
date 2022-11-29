@@ -3,6 +3,7 @@
 currentPackage="awesome"
 
 install_package "network-manager-applet"
+install_package "pa-applet-git"
 install_package "acpid"
 sudo systemctl enable acpid &>> $LOGFILE
 install_package "network-manager-applet"

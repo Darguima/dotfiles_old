@@ -522,5 +522,6 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 -- {{{ Signals
 awful.spawn.with_shell("nm-applet")
+awful.spawn.with_shell("pa-applet")
 -- }}}
 
