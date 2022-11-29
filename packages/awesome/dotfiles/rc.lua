@@ -207,6 +207,7 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
+	    require("battery-widget") {},
             mytextclock,
             s.mylayoutbox,
         },
@@ -517,3 +518,9 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
+
+-- {{{ Signals
+awful.spawn.with_shell("nm-applet")
+-- }}}
+
