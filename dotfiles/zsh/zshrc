@@ -15,7 +15,7 @@ export SSH_AUTH_SOCK=/run/user/$(id -u)/keyring/ssh
 
 # Importing Modules ====================================================
 
-for module in $(ls $DOTFILES/packages/zsh/dotfiles/modules/*.zsh); do
+for module in $(ls $DOTFILES/dotfiles/zsh/modules/*.zsh); do
   source $module
 done
 

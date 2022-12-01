@@ -19,7 +19,7 @@ git clone git@github.com:Darguima/dotfiles.git ~/.dotfiles
 Run the install script:
 
 ```
-~/.dotfiles/install
+~/.dotfiles/install.py
 ```
 
 ## Packages
