@@ -1,22 +1,35 @@
 from subprocess import call, getstatusoutput
+from Utils.errorExit import exit_with_error
+from Utils.colors import colors
 
-def run_command(command: str, captureStdOut=True, exit_on_error=True):
+def run_command(command: str, capture_std_out=True, exit_on_error=True):
   """
-  This function will run a shell command. 
-  
-  * captureStdOut
-  It can capture or not the command's output, in order to hide or show
-    it. This can be done passing 'True' to `captureStdOut` to hide the output 
-    or 'False' to show it.
+  Run a shell command
 
-  * captureStdOut
-  If the command is crucial to the script you can stop it when some one runs 
-    into an error. If you want that the script stops when a command return an
-    error code use `True` on `exit_on_error`, otherwise, use `False`.
+  Parameters
+  ----------
+  command : str
+      The bash command to be executed
+
+  capture_std_out : bool, optional
+    It can capture (True) or not (False) the command's output, in order to hide or show
+      it. If you capture, the output will not be printed and will be returned.
+
+  exit_on_error : bool, optional
+    If the command is crucial to the script you can stop it when some one runs 
+      into an error. If you want that the script stops when a command return an
+      error code use `True`, otherwise, use `False`.
+
+  Returns
+  -------
+  tuple
+      (return_code, stdout)
   """
 
   stdout = ""
-  if captureStdOut:
+  return_code = 0
+  
+  if capture_std_out:
     [return_code, stdout] = getstatusoutput(command)
   else:
     try:
@@ -24,7 +37,7 @@ def run_command(command: str, captureStdOut=True, exit_on_error=True):
     except:
       return_code = 1
 
-  if return_code == 0:
-    return stdout
-  elif exit_on_error:
-    exit()
+  if exit_on_error and return_code != 0:
+    exit_with_error(f"Error running command - {colors.UNDERLINE}{command}{colors.ENDC}", stdout)
+  else:
+    return (return_code, stdout)
