@@ -1,7 +1,7 @@
 from os import chdir
 
 from Utils.run_command import run_command
-from Utils.print_log import print_log
+from Utils.print_log import print_log, reprint_log
 from Utils.colors import colors
 
 def install(CONSTANTS: dict):
@@ -31,3 +31,5 @@ def install(CONSTANTS: dict):
 
 def update(CONSTANTS: dict):
   print_log(f"\t-> Updating {colors.BOLD}yay{colors.ENDC}")
+  run_command("yay -Suy --noconfirm")
+  reprint_log(f"\t-> {colors.BOLD}yay{colors.ENDC} updated")
