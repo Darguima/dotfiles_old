@@ -3,6 +3,7 @@ from os import chdir
 from Utils.run_command import run_command
 from Utils.print_log import print_log, reprint_log
 from Utils.colors import colors
+from Utils.git_clone import git_clone
 
 def install(CONSTANTS: dict):
   yayIsInstalled = not run_command("command -v yay", exit_on_error=False)[0]
@@ -19,7 +20,7 @@ def install(CONSTANTS: dict):
     run_command("sudo pacman -S --needed --noconfirm base-devel")
 
     print_log("\t\t-> Cloning GitHub repository")
-    run_command(f"git clone https://aur.archlinux.org/yay.git \"{CONSTANTS['TEMP_PATH']}/yay\"")
+    git_clone("yay.git", f"{CONSTANTS['TEMP_PATH']}/yay", "https://aur.archlinux.org", overwrite=True)
 
     print_log("\t\t-> Making package")
     chdir(f"{CONSTANTS['TEMP_PATH']}/yay")
