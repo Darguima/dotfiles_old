@@ -1,6 +1,5 @@
-from Utils.print_log import print_log, reprint_log
+from Utils.print_log import print_log, reprint_log, print_log_status
 from Utils.run_command import run_command
-from Utils.colors import colors
 
 
 
@@ -19,11 +18,11 @@ def install_package(package_name: str, package_dependencies: list[str] = []):
       work properly.
   """
   
-  print_log(f"\t-> Installing {colors.BOLD}{package_name}{colors.ENDC}")
+  print_log_status(package_name, 1)
   run_command(f"yay -S {package_name} --needed --noconfirm")
 
   if len(package_dependencies) == 0:
-    reprint_log(f"\t-> {colors.BOLD}{package_name}{colors.ENDC} installed")
+    print_log_status(package_name, 2, reprint_log)
   else:
     print_log(f"\t\t-> Installing {len(package_dependencies)} {'dependencies' if len(package_dependencies) != 1 else 'dependency'}:")
 
@@ -31,5 +30,5 @@ def install_package(package_name: str, package_dependencies: list[str] = []):
       print_log(f"\t\t\t-> {dependency}")
       run_command(f"yay -S {dependency} --needed --noconfirm")
 
-    print_log(f"\t\t-> {colors.BOLD}{package_name}{colors.ENDC} installed")
+    print_log_status(package_name, 2, indentation = 2)
     

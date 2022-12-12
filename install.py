@@ -1,7 +1,7 @@
 #! /usr/bin/python3
 
 from os import makedirs, path, chdir
-from os.path import dirname
+from os.path import dirname, expanduser
 from shutil import rmtree
 
 from Utils.request_sudo import request_sudo
@@ -14,6 +14,7 @@ _root_path = dirname(path.realpath(__file__))
 CONSTANTS = {
   "ROOT_PATH": _root_path,
   "TEMP_PATH": f"{_root_path}/temp",
+  "HOME": expanduser("~")
 }
 
 request_sudo()
