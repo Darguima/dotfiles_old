@@ -1,5 +1,13 @@
-from Utils.print_log import print_log
-from Utils.colors import colors
+from Utils.install_package import install_package
+from Utils.create_sym_link import create_sym_link
+from Utils.print_log import reprint_log, print_log_status
 
 def installAndConfigure(CONSTANTS: dict):
-  print_log(f"\t-> Installing and Configuring {colors.BOLD}alacritty{colors.ENDC}")
+  install_package("alacritty")
+
+  print_log_status("alacritty", 3, reprint_log)
+
+  create_sym_link("dotfiles/alacritty/alacritty.yml", f"{CONSTANTS['HOME']}/.config/awesome/alacritty.yml")
+  
+  print_log_status("alacritty", 4, reprint_log)
+
