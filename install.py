@@ -8,7 +8,7 @@ from Utils.request_sudo import request_sudo
 from Utils.print_log import print_log
 from Utils.colors import colors
 
-from InstallationScripts import yay, alacritty
+from InstallationScripts import yay, alacritty, awesome
 
 _root_path = dirname(path.realpath(__file__))
 _home = expanduser("~")
@@ -38,6 +38,7 @@ yay.install(CONSTANTS)
 yay.update(CONSTANTS)
 
 alacritty.installAndConfigure(CONSTANTS)
+awesome.installAndConfigure(CONSTANTS)
 
 print_log("\nBye\n")
 rmtree(CONSTANTS["TEMP_PATH"])

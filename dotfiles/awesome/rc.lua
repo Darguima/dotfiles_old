@@ -227,9 +227,14 @@ root.buttons(gears.table.join(
 -- {{{ Key bindings
 globalkeys = gears.table.join(
     -- {{{ My bindings
-    awful.key({ modkey,    }, "f", function () awful.spawn("firefox") end,
+    awful.key({ modkey,           }, "f", function () awful.spawn("firefox") end,
               {description = "open firefox", group = "launcher"}),
-    -- }}}
+    
+    awful.key({ modkey, "Control" }, "l", function () awful.spawn("lockscreen") end,
+              {description = "Lock Screen", group = "System"}),
+
+    awful.key({ modkey, "Control" }, "s", function () awful.spawn("lockscreen"); awful.spawn("systemctl suspend") end,
+              {description = "Suspend", group = "System"}),
 
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
@@ -521,8 +526,10 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 
--- {{{ Signals
+-- {{{ Autostart
 awful.spawn.with_shell("nm-applet")
-awful.spawn.with_shell("pa-applet")
+awful.spawn.with_shell("kill $(pgrep pa-applet --exact); pa-applet --disable-notifications")
+awful.spawn.with_shell("libinput-gestures-setup start")
+awful.spawn.with_shell("xautolock -time 10 -locker \"/usr/bin/lockscreen\"")
 -- }}}
 
