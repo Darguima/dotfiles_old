@@ -11,10 +11,12 @@ from Utils.colors import colors
 from InstallationScripts import yay, alacritty
 
 _root_path = dirname(path.realpath(__file__))
+_home = expanduser("~")
 CONSTANTS = {
   "ROOT_PATH": _root_path,
   "TEMP_PATH": f"{_root_path}/temp",
-  "HOME": expanduser("~")
+  "HOME": _home,
+  "DOTFILES": f"{_home}/.dotfiles",
 }
 
 request_sudo()

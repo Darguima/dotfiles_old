@@ -7,7 +7,7 @@ def installAndConfigure(CONSTANTS: dict):
 
   print_log_status("alacritty", 3, reprint_log)
 
-  create_sym_link("dotfiles/alacritty/alacritty.yml", f"{CONSTANTS['HOME']}/.config/awesome/alacritty.yml")
+  create_sym_link(f"{CONSTANTS['DOTFILES']}/dotfiles/alacritty/alacritty.yml", f"{CONSTANTS['HOME']}/.config/alacritty/alacritty.yml")
   
   print_log_status("alacritty", 4, reprint_log)
 
