@@ -27,7 +27,7 @@ def git_clone(path: str, dst_folder: str, host="https://github.com", overwrite: 
   Returns
   -------
   int
-      0 = cloned (clean)
+      0 = cloned (no problems)
       1 = not cloned (ignored)
       2 = cloned (overwritten)
   """
