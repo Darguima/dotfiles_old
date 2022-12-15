@@ -34,8 +34,7 @@ Welcome to my {colors.BOLD}.dotfiles{colors.ENDC}.
   by {colors.BOLD}Darguima{colors.ENDC}
 """)
 
-yay.install(CONSTANTS)
-yay.update(CONSTANTS)
+yay.installAndUpdate(CONSTANTS)
 
 alacritty.installAndConfigure(CONSTANTS)
 awesome.installAndConfigure(CONSTANTS)

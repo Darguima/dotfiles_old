@@ -1,4 +1,4 @@
-from Utils.print_log import print_log, reprint_log, print_log_status
+from Utils.print_log import print_log_status
 from Utils.run_command import run_command
 
 def install_package(package_name: str, package_dependencies: list[str] = []):
@@ -16,17 +16,17 @@ def install_package(package_name: str, package_dependencies: list[str] = []):
       work properly.
   """
   
-  print_log_status(package_name, 1)
+  print_log_status(1)
   run_command(f"yay -S {package_name} --needed --noconfirm")
 
   if len(package_dependencies) == 0:
-    print_log_status(package_name, 2, reprint_log)
+    print_log_status(2)
   else:
-    print_log(f"\t\t-> Installing {len(package_dependencies)} {'dependencies' if len(package_dependencies) != 1 else 'dependency'}:")
+    print_log_status(1, f"Installing {len(package_dependencies)} {'dependencies' if len(package_dependencies) != 1 else 'dependency'}:")
 
     for dependency in package_dependencies:
-      print_log(f"\t\t\t-> {dependency}")
+      print_log_status(1, dependency, indentation=2)
       run_command(f"yay -S {dependency} --needed --noconfirm")
 
-    print_log_status(package_name, 2, indentation = 2)
+    print_log_status(2, indentation = 2)
     
