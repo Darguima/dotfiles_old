@@ -3,10 +3,12 @@ from Utils.create_sym_link import create_sym_link
 from Utils.git_clone import git_clone
 from Utils.run_command import run_command
 from Utils.print_log import print_log_box, print_log_status
+from Utils.download_file import download_file
 
 from os.path import exists
 from shutil import rmtree
 
+from urllib.parse import quote as uri_converter
 
 def installAndConfigure(CONSTANTS: dict):
   print_log_box("zsh")
@@ -31,12 +33,13 @@ def installAndConfigure(CONSTANTS: dict):
 
   print_log_status(3, "Installing Meslo Nerd Font")
 
-  fonts_names = ["MesloLGS%20NF%20Regular.ttf", "MesloLGS%20NF%20Bold.ttf", "MesloLGS%20NF%20Italic.ttf", "MesloLGS%20NF%20Bold%20Italic.ttf"]
-  fonts_path = "/usr/share/fonts/MesloLGS"
-
-  run_command(f"sudo mkdir -p {fonts_path}")
+  fonts_names = ["MesloLGS NF Regular.ttf", "MesloLGS NF Bold.ttf", "MesloLGS NF Italic.ttf", "MesloLGS NF Bold Italic.ttf"]
   for font_name in fonts_names:
-    run_command(f"sudo wget -P {fonts_path} https://github.com/romkatv/powerlevel10k-media/raw/master/{font_name}")
+    download_file(
+      f"https://github.com/romkatv/powerlevel10k-media/raw/master/{uri_converter(font_name)}",
+      f"/usr/share/fonts/MesloLGS/{font_name}",
+      sudo=True
+    )
 
   print_log_status(3, "Cloning powerlevel10k")
   git_clone("romkatv/powerlevel10k", f"{CONSTANTS['ZSH_CUSTOM']}/themes/powerlevel10k")
