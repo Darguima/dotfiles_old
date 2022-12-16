@@ -230,11 +230,15 @@ globalkeys = gears.table.join(
     awful.key({ modkey,           }, "f", function () awful.spawn("firefox") end,
               {description = "open firefox", group = "launcher"}),
     
+    awful.key({ modkey, }, "e", function () awful.spawn("rofi -show run"); end,
+              {description = "rofi", group = "launcher"}),
+    
     awful.key({ modkey, "Control" }, "l", function () awful.spawn("lockscreen") end,
               {description = "Lock Screen", group = "System"}),
 
     awful.key({ modkey, "Control" }, "s", function () awful.spawn("lockscreen"); awful.spawn("systemctl suspend") end,
               {description = "Suspend", group = "System"}),
+    -- }}}
 
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),

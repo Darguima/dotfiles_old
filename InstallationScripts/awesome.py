@@ -9,7 +9,7 @@ def installAndConfigure(CONSTANTS: dict):
 
   install_package(
     "awesome",
-    ["network-manager-applet", "pa-applet-git", "acpid", "acpilight", "xorg-xrandr", "arandr", "imagemagick", "i3lock"]
+    ["network-manager-applet", "pa-applet-git", "acpid", "acpilight", "xorg-xrandr", "arandr", "imagemagick", "i3lock", "rofi"]
   )
 
   print_log_status(3)
