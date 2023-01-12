@@ -5,8 +5,8 @@ from os.path import dirname, expanduser
 from shutil import rmtree
 
 from Utils.request_sudo import request_sudo
-from Utils.print_log import print_log
-from Utils.colors import colors
+from Utils.print_log import print_log, print_header
+from Utils.get_args import get_args
 
 from InstallationScripts import yay, alacritty, awesome, zsh
 
@@ -25,17 +25,16 @@ CONSTANTS = {
 request_sudo()
 chdir(CONSTANTS['ROOT_PATH'])
 """
-Fix: sometimes, when canceling this script, and rerunning it, a permission error wil be 
+Fix: sometimes, when canceling this script, and rerunning it, a permission error will be 
   triggered here, when removing the temp folder.
 """
 if path.isdir(f"{CONSTANTS['TEMP_PATH']}"):
   rmtree(CONSTANTS["TEMP_PATH"])
 makedirs(CONSTANTS["TEMP_PATH"])
 
-print_log(f"""
-Welcome to my {colors.BOLD}.dotfiles{colors.ENDC}.
-  by {colors.BOLD}Darguima{colors.ENDC}
-""")
+print_header()
+
+environment, overwrite = get_args() 
 
 yay.installAndUpdate(CONSTANTS)
 

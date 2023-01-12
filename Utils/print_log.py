@@ -2,6 +2,12 @@ from Utils.colors import colors
 
 output = ""
 
+def print_header():
+  print_log(f"""
+Welcome to my {colors.BOLD}.dotfiles{colors.ENDC}.
+  by {colors.BOLD}Darguima{colors.ENDC}
+""")
+
 def print_log(msg: str):
 
   """
@@ -70,6 +76,8 @@ def print_log_status(status: int, message = "", indentation: int = 1):
   ----------
   status: int
       The current status:
+
+        0 - none
 
         1 - installing
         2 - installed
