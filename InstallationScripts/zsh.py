@@ -5,6 +5,7 @@ from Utils.run_command import run_command
 from Utils.print_log import print_log_box, print_log_status
 from Utils.download_file import download_file
 from Utils.get_args import convert_overwrite_to_bool
+from Utils.colors import colors
 
 from os import listdir
 from os.path import exists
@@ -54,6 +55,11 @@ def installAndConfigure(CONSTANTS: dict, args: dict):
   print_log_status(3, "Changing default shell")
   run_command('sudo chsh --shell $(command -v zsh) $USER')
   
+  print_log_status(3, f"Storing {colors.UNDERLINE}{args['environment']}{colors.ENDC} variable into {colors.UNDERLINE}environment.zsh{colors.ENDC}")
+  environment_file = open(f"{CONSTANTS['DOTFILES']}/dotfiles/zsh/modules/environment.zsh", "w")
+  environment_file.write(f"export DOTFILES_ENVIRONMENT=\"{args['environment']}\"")
+  environment_file.close()
+
   print_log_status(3, "Linking dotfiles (zshrc & p10k.zsh)")
   create_sym_link(f"{CONSTANTS['DOTFILES']}/dotfiles/zsh/zshrc", f"{CONSTANTS['HOME']}/.zshrc")
   create_sym_link(f"{CONSTANTS['DOTFILES']}/dotfiles/zsh/p10k.zsh", f"{CONSTANTS['HOME']}/.p10k.zsh")

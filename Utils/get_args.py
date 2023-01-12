@@ -25,8 +25,10 @@ def get_args():
   Get the args passed to the script.
 
   -> environment = "desktop" | "laptop"
-      Some files dotfiles need different values from each computer to computer.
-      Choose one and feel free to add more
+      Some dotfiles need different values from each computer to computer.
+      This will create a bash variable variable `$DOTFILES_ENVIRONMENT`;
+      When needed `{environment}@{filename}` dotfiles are used.
+      (ex: desktop@alacritty.yml)
 
   -> overwrite = None | True | False
       When downloading files, repositories ... you want:
@@ -59,14 +61,16 @@ def get_args():
     arg = arg.lower().strip()
     
     if opt in ["-h", "--help"]:
-      print_log("These are the parameters that you use:")
+      print_log("These are the parameters that you can use:")
 
       print_param_info(
         "-e --environment",
         environment_params[0],
         environment_params[1:],
 """Some dotfiles need different values from each computer to computer.
-Choose one and feel free to add more"""
+This will create a bash variable variable `$DOTFILES_ENVIRONMENT`;
+When needed `{environment}@{filename}` dotfiles are used.
+(ex: desktop@alacritty.yml)"""
       )
 
       print_param_info(
@@ -84,6 +88,7 @@ Examples of commands:
 
 > ~/.dotfiles/install.py
 > ~/.dotfiles/install.py --environment laptop -o True
+> ~/.dotfiles/install.py --overwrite None
 """)
       exit()
 
