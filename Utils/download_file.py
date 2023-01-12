@@ -1,9 +1,9 @@
 from Utils.errorExit import exit_with_error
 from Utils.run_command import run_command
 from os.path import exists, dirname
-from os import makedirs
+# from os import makedirs
 
-import urllib.request
+# import urllib.request
 
 def download_file(url: str, dst_file: str, overwrite: bool = False, sudo = False):
   """
@@ -33,6 +33,11 @@ def download_file(url: str, dst_file: str, overwrite: bool = False, sudo = False
       2 = downloaded (overwritten)
   """
 
+  """
+  ToDo: This module is using run_command to be able to use `sudo`.
+        It should be using `urlretrieve` instead, but until now it doesn't work with sudo.
+  """
+  
   parent_folder = dirname(dst_file)
   try:
     # makedirs(parent_folder, exist_ok=True)

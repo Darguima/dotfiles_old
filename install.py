@@ -34,13 +34,13 @@ makedirs(CONSTANTS["TEMP_PATH"])
 
 print_header()
 
-environment, overwrite = get_args() 
+args = get_args() 
 
-yay.installAndUpdate(CONSTANTS)
+yay.installAndUpdate(CONSTANTS, args)
 
-alacritty.installAndConfigure(CONSTANTS)
-zsh.installAndConfigure(CONSTANTS)
-awesome.installAndConfigure(CONSTANTS)
+alacritty.installAndConfigure(CONSTANTS, args)
+zsh.installAndConfigure(CONSTANTS, args)
+awesome.installAndConfigure(CONSTANTS, args)
 
 print_log("\nBye\n")
 rmtree(CONSTANTS["TEMP_PATH"])

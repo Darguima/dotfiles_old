@@ -36,8 +36,11 @@ def get_args():
 
   Returns
   -------
-  tuple
-      (environment, overwrite)
+  dict
+      {
+        environment: ...
+        overwrite: ...
+      }
   """
 
   environment_params = ["desktop", "laptop"]
@@ -109,4 +112,14 @@ Examples of commands:
   print_log_status(0, f"overwrite = {overwrite}", 0)
   print_log_box()
   
-  return environment, overwrite
+  return {
+    "environment": environment,
+    "overwrite": overwrite
+  }
+
+def convert_overwrite_to_bool(arg_value, default_value):
+  if arg_value == True or arg_value == False:
+    return arg_value
+    
+  elif arg_value == None:
+    return default_value

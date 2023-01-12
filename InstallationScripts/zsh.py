@@ -4,13 +4,15 @@ from Utils.git_clone import git_clone
 from Utils.run_command import run_command
 from Utils.print_log import print_log_box, print_log_status
 from Utils.download_file import download_file
+from Utils.get_args import convert_overwrite_to_bool
 
+from os import listdir
 from os.path import exists
 from shutil import rmtree
 
 from urllib.parse import quote as uri_converter
 
-def installAndConfigure(CONSTANTS: dict):
+def installAndConfigure(CONSTANTS: dict, args: dict):
   print_log_box("zsh")
 
   install_package("zsh")
@@ -33,13 +35,18 @@ def installAndConfigure(CONSTANTS: dict):
 
   print_log_status(3, "Installing Meslo Nerd Font")
 
+  dst_folder = "/usr/share/fonts/MesloLGS"
   fonts_names = ["MesloLGS NF Regular.ttf", "MesloLGS NF Bold.ttf", "MesloLGS NF Italic.ttf", "MesloLGS NF Bold Italic.ttf"]
+  files_on_dst_folder = listdir(dst_folder)
+  overwrite_fonts = convert_overwrite_to_bool(args["overwrite"], False)
+
   for font_name in fonts_names:
-    download_file(
-      f"https://github.com/romkatv/powerlevel10k-media/raw/master/{uri_converter(font_name)}",
-      f"/usr/share/fonts/MesloLGS/{font_name}",
-      sudo=True
-    )
+    if overwrite_fonts or font_name not in files_on_dst_folder:
+      download_file(
+        f"https://github.com/romkatv/powerlevel10k-media/raw/master/{uri_converter(font_name)}",
+        f"{dst_folder}/{font_name}",
+        sudo=True
+      )
 
   print_log_status(3, "Cloning powerlevel10k")
   git_clone("romkatv/powerlevel10k", f"{CONSTANTS['ZSH_CUSTOM']}/themes/powerlevel10k")

@@ -2,7 +2,7 @@ from Utils.install_package import install_package
 from Utils.create_sym_link import create_sym_link
 from Utils.print_log import reprint_log, print_log_status, print_log_box
 
-def installAndConfigure(CONSTANTS: dict):
+def installAndConfigure(CONSTANTS: dict, args: dict):
   print_log_box("alacritty")
 
   install_package("alacritty")

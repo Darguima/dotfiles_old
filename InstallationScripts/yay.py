@@ -3,8 +3,9 @@ from os import chdir
 from Utils.run_command import run_command
 from Utils.print_log import print_log_box, print_log_status
 from Utils.git_clone import git_clone
+from Utils.get_args import convert_overwrite_to_bool
 
-def installAndUpdate(CONSTANTS: dict):
+def installAndUpdate(CONSTANTS: dict, args: dict):
   print_log_box("yay")
 
   yayIsInstalled = not run_command("command -v yay", exit_on_error=False)[0]
@@ -21,7 +22,11 @@ def installAndUpdate(CONSTANTS: dict):
     run_command("sudo pacman -S --needed --noconfirm base-devel")
 
     print_log_status(1, "Cloning GitHub repository")
-    git_clone("yay.git", f"{CONSTANTS['TEMP_PATH']}/yay", "https://aur.archlinux.org", overwrite=True)
+    git_clone(
+      "yay.git",
+      f"{CONSTANTS['TEMP_PATH']}/yay", "https://aur.archlinux.org",
+      overwrite=convert_overwrite_to_bool(args["overwrite"], False)
+    )
 
     print_log_status(1, "Making package")
     chdir(f"{CONSTANTS['TEMP_PATH']}/yay")
