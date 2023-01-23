@@ -1,3 +1,12 @@
+-- {{{ My modules
+
+-- dotfiles_environment = `desktop`, `laptop` or ...
+-- Why? In `desktop`, for example, isn't needed to load battery or brightness widgtes.
+require("get-dotfiles-environment")
+dotfiles_environment = get_dotfiles_environment() 
+
+-- }}}
+
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
@@ -166,7 +175,7 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Each screen has its own tag table.
 
-    awful.tag({ "Main", "Code", "Study", "Others" }, s, awful.layout.layouts[1])
+    awful.tag({ "1", "2", "3", "4", "5", "6" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -196,6 +205,12 @@ awful.screen.connect_for_each_screen(function(s)
     s.mywibox = awful.wibar({ position = "bottom", screen = s })
     
     -- Add widgets to the wibox
+
+    if dotfiles_environment == "laptop" then
+        battery_widget = require("battery-widget") {}
+        brightness_widget = require("brightness")({backend = "xbacklight"}).widget
+    end
+
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
@@ -207,8 +222,8 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
-            require("battery-widget") {},
-            require("brightness")({backend = "xbacklight"}).widget,
+            battery_widget,
+            brightness_widget,
             mytextclock,
             s.mylayoutbox,
         },
@@ -230,7 +245,7 @@ globalkeys = gears.table.join(
     awful.key({ modkey,           }, "f", function () awful.spawn("firefox") end,
               {description = "open firefox", group = "launcher"}),
     
-    awful.key({ modkey, }, "e", function () awful.spawn("rofi -show run"); end,
+    awful.key({ modkey, }, "d", function () awful.spawn("rofi -show run"); end,
               {description = "rofi", group = "launcher"}),
     
     awful.key({ modkey, "Control" }, "l", function () awful.spawn("lockscreen") end,
@@ -387,7 +402,7 @@ clientkeys = gears.table.join(
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it work on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
-for i = 1, 4 do
+for i = 1, 9 do
     globalkeys = gears.table.join(globalkeys,
         -- View tag only.
         awful.key({ modkey }, "#" .. i + 9,
@@ -531,8 +546,14 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 
 -- {{{ Autostart
+-- Applets
 awful.spawn.with_shell("nm-applet")
 awful.spawn.with_shell("kill $(pgrep pa-applet --exact); pa-applet --disable-notifications")
+awful.spawn.with_shell("blueman-applet")
+awful.spawn.with_shell("kill $(pgrep syncthingtray --exact); syncthingtray")
+awful.spawn.with_shell("kdeconnect-indicator")
+
+-- Others
 awful.spawn.with_shell("libinput-gestures-setup start")
 awful.spawn.with_shell("xautolock -time 10 -locker \"/usr/bin/lockscreen\"")
 -- }}}

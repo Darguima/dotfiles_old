@@ -30,8 +30,9 @@ def installAndConfigure(CONSTANTS: dict, args: dict):
     overwrite=convert_overwrite_to_bool(args["overwrite"], True)
   )
 
-  print_log_status(3, "Linking `rc.lua` & `lockscreen`")
+  print_log_status(3, "Linking `rc.lua`, `lockscreen` and my awesome modules")
   create_sym_link(f"{CONSTANTS['DOTFILES']}/dotfiles/awesome/rc.lua", f"{CONSTANTS['HOME']}/.config/awesome/rc.lua")
+  create_sym_link(f"{CONSTANTS['DOTFILES']}/dotfiles/awesome/get-dotfiles-environment", f"{CONSTANTS['HOME']}/.config/awesome/get-dotfiles-environment")
   create_sym_link(f"{CONSTANTS['DOTFILES']}/dotfiles/awesome/lockscreen", "/usr/bin/lockscreen", sudo=True)
   
   print_log_status(4)
