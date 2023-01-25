@@ -4,6 +4,18 @@ from getopt import getopt, GetoptError
 from Utils.print_log import print_log, print_log_box, print_log_status
 from Utils.colors import colors
 
+"""
+Places where updated when added/changed some arg:
+
+  -> README.md
+  -> function `get_args` documentation on this file
+  -> function `get_args`:
+    1. add the new argument possible values
+    2. add an if clause
+    3. convert the value
+    4. export it
+"""
+
 def print_param_info(param_flag: str, default_option: str, other_options: list[str], description: str = ""):
   params_info = f" = {colors.UNDERLINE}{default_option}{colors.ENDC}" if default_option else ""
 
