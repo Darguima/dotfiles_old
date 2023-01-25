@@ -1,4 +1,5 @@
 from Utils.colors import colors
+from Utils.logger import log
 
 output = ""
 
@@ -25,6 +26,7 @@ def print_log(msg: str):
   global output
 
   print("\n" + msg, end="\r")
+  log(msg)
   output = msg
 
 def reprint_log(msg: str):
@@ -46,6 +48,7 @@ def reprint_log(msg: str):
 
   cleanSpaces = " " * (len(output) - len(msg))
   print(msg + cleanSpaces, end="\r")
+  log(msg)
   output = msg
 
 def print_log_box(package_name: str = "", box_size = 30):

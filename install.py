@@ -5,8 +5,9 @@ from os.path import dirname, expanduser
 from shutil import rmtree
 
 from Utils.request_sudo import request_sudo
-from Utils.print_log import print_log, print_header
+from Utils.print_log import print_log, print_header, print_log_box, print_log_status
 from Utils.get_args import get_args
+from Utils.colors import colors
 
 from InstallationScripts import yay, alacritty, awesome, zsh
 
@@ -35,6 +36,12 @@ makedirs(CONSTANTS["TEMP_PATH"])
 print_header()
 
 args = get_args() 
+
+print_log_box("Some Info")
+
+print_log_status(0, f"For a detailed log of everything (like commands output) check the log file (with cat) at {colors.UNDERLINE}{CONSTANTS['ROOT_PATH']}/log.txt{colors.ENDC}", 0)
+
+print_log_box()
 
 yay.installAndUpdate(CONSTANTS, args)
 

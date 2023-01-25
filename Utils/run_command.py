@@ -1,5 +1,6 @@
 from subprocess import call, getstatusoutput
 from Utils.errorExit import exit_with_error
+from Utils.logger import log
 from Utils.colors import colors
 
 def run_command(command: str, capture_std_out=True, exit_on_error=True):
@@ -31,6 +32,7 @@ def run_command(command: str, capture_std_out=True, exit_on_error=True):
   
   if capture_std_out:
     [return_code, stdout] = getstatusoutput(command)
+    log(stdout, command)
   else:
     try:
       return_code = call(command.split(" "))
