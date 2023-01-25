@@ -1,7 +1,7 @@
 from Utils.print_log import print_log_status
 from Utils.run_command import run_command
 
-def install_package(package_name: str, package_dependencies: list[str] = []):
+def install_package(package_name: str, package_dependencies: list[str] = [], print_status = False):
   """
   Install a pacman/AUR package. 
 
@@ -16,17 +16,25 @@ def install_package(package_name: str, package_dependencies: list[str] = []):
       work properly.
   """
   
-  print_log_status(1)
+  if print_status: 
+    print_log_status(1)
+  
   run_command(f"yay -S {package_name} --needed --noconfirm")
 
   if len(package_dependencies) == 0:
-    print_log_status(2)
+    if print_status: 
+      print_log_status(2)
+      
   else:
-    print_log_status(1, f"Installing {len(package_dependencies)} {'dependencies' if len(package_dependencies) != 1 else 'dependency'}:")
+    if print_status: 
+      print_log_status(1, f"Installing {len(package_dependencies)} {'dependencies' if len(package_dependencies) != 1 else 'dependency'}:")
 
     for dependency in package_dependencies:
-      print_log_status(1, dependency, indentation=2)
+      if print_status: 
+        print_log_status(1, dependency, indentation=2)
+      
       run_command(f"yay -S {dependency} --needed --noconfirm")
 
-    print_log_status(2, indentation = 2)
+    if print_status: 
+      print_log_status(2, indentation = 2)
     

@@ -100,6 +100,10 @@ Edit and uncomment the `create_sym_link`, if needed, to the respective file. Don
 
 Now if you need download some extra files or Github repositories, start/enable some services, etc. you can use, the Utils scripts. If you don't find the perfect one for your case, just run the shell command, with `Utils/run_command` to finish the configuration. Try respect the logs/prints areas (read more below).
 
+###### And if I want just install the package and not configure it
+
+Well, just edit `InstallationScripts/others.py`. Copy the template and paste it on the correct place, edit the packages and dependencies names and it's done.
+
 #### The logs/prints
 
 One of my goals was try have a good text return of the installation status, not only command outputs or a void terminal.
@@ -109,3 +113,5 @@ When writing yours installation script you should use `print_log_status(x, "msg"
 ##### Logs
 
 The terminal output, and the commands output, are stored inside the log file (usually stored at ~/.dotfiles/log.txt). If something goes wrong and you want to know why, you can read it any time. Just do it with `cat` command for a better experience.
+
+
