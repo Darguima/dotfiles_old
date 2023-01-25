@@ -4,10 +4,12 @@ from os import makedirs, path, chdir
 from os.path import dirname, expanduser
 from shutil import rmtree
 
+from Utils.logger import logger_init
+from Utils.run_command import run_command_init
+
 from Utils.request_sudo import request_sudo
 from Utils.print_log import print_log, print_header, print_log_box, print_log_status
 from Utils.get_args import get_args
-from Utils.run_command import run_command_init
 from Utils.colors import colors
 
 from InstallationScripts import yay, alacritty, awesome, zsh
@@ -18,6 +20,7 @@ _zsh = f"{_home}/.oh-my-zsh"
 CONSTANTS = {
   "ROOT_PATH": _root_path,
   "TEMP_PATH": f"{_root_path}/temp",
+  "LOG_FILE": f"{_root_path}/log.txt",
   "HOME": _home,
   "DOTFILES": f"{_home}/.dotfiles",
   "ZSH_PATH": _zsh,
@@ -38,11 +41,12 @@ print_header()
 
 args = get_args() 
 
+logger_init(CONSTANTS["LOG_FILE"])
 run_command_init(args["show_commands"])
 
 print_log_box("Some Info")
 
-print_log_status(0, f"For a detailed log of everything (like commands output) check the log file (with cat) at {colors.UNDERLINE}{CONSTANTS['ROOT_PATH']}/log.txt{colors.ENDC}", 0)
+print_log_status(0, f"For a detailed log of everything (like commands output) check the log file (with cat) at {colors.UNDERLINE}{CONSTANTS['LOG_FILE']}{colors.ENDC}", 0)
 
 print_log_box()
 

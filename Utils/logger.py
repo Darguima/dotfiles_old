@@ -1,6 +1,24 @@
 from Utils.colors import colors
 
-logfile = open("log.txt", "w")
+log_file_path = "log.txt"
+logfile = open(log_file_path, "w")
+
+def logger_init(new_log_file_path: str):
+  """
+  Init the logger functions.
+  Call this function if you want use a different configuration, for example:
+
+  Parameters
+  ----------
+  new_log_file_path: str
+      Where is the log file?
+      Default: "log.txt"
+  """
+
+  global log_file_path, logfile
+  log_file_path = new_log_file_path
+  logfile.close()
+  logfile = open(log_file_path, "w")
 
 def prepare_command_log(msg: str, command: str):
   """

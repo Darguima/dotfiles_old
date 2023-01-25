@@ -7,6 +7,16 @@ from Utils.colors import colors
 print_command_output = False
 
 def run_command_init(new_print_command_output: bool):
+  """
+  Init the run_command function.
+  Call this function if you want use a different configuration, for example:
+
+  Parameters
+  ----------
+  new_print_command_output: bool
+      Should the commands output be printed?
+      Default: False
+  """
   global print_command_output
   print_command_output = new_print_command_output
 
