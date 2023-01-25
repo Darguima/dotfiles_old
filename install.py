@@ -7,6 +7,7 @@ from shutil import rmtree
 from Utils.request_sudo import request_sudo
 from Utils.print_log import print_log, print_header, print_log_box, print_log_status
 from Utils.get_args import get_args
+from Utils.run_command import run_command_init
 from Utils.colors import colors
 
 from InstallationScripts import yay, alacritty, awesome, zsh
@@ -36,6 +37,8 @@ makedirs(CONSTANTS["TEMP_PATH"])
 print_header()
 
 args = get_args() 
+
+run_command_init(args["show_commands"])
 
 print_log_box("Some Info")
 

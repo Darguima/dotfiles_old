@@ -47,11 +47,16 @@ These are the parameters that you can use:
 		  * ignore a new download to be quick? (False)
 		  * let the default option for each case? (None)
 
+	-s --show_commands = false | true
+		When downloading running commands ... you want:
+		  * Hide the command output and just show a summary info (False)
+		  * Show the original command output + summary info (True)
+
 Examples of commands:
 
 > ~/.dotfiles/install.py
 > ~/.dotfiles/install.py --environment laptop -o True
-> ~/.dotfiles/install.py --overwrite None
+> ~/.dotfiles/install.py --overwrite None -s False
 ```
 
 ## Packages

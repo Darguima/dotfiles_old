@@ -35,6 +35,11 @@ def get_args():
         * a fresh download? (True)
         * ignore a new download to be quick? (False)
         * let the default option for each case? (None)
+  
+  -> show_commands = False | True
+      When downloading running commands ... you want:
+        * Hide the command output and just show a summary info (False)
+        * Show the original command output + summary info (True)
 
   Returns
   -------
@@ -42,6 +47,7 @@ def get_args():
       {
         environment: ...
         overwrite: ...
+        show_commands: ...
       }
   """
 
@@ -51,9 +57,11 @@ def get_args():
   overwrite_params = ["none", "true", "false"]
   overwrite = overwrite_params[0]
 
+  show_commands_params = ["false", "true"]
+  show_commands = show_commands_params[0]
 
   try:
-    opts, _ = getopt(argv[1:], "he:o:", ["help", "environment=", "overwrite="])
+    opts, _ = getopt(argv[1:], "he:o:s:", ["help", "environment=", "overwrite=", "show_commands="])
   except GetoptError:
     print_params_error_message()
   
@@ -83,12 +91,21 @@ When needed `{environment}@{filename}` dotfiles are used.
   * let the default option for each case? (None)"""
       )
 
+      print_param_info(
+        "-s --show_commands",
+        show_commands_params[0],
+        show_commands_params[1:],
+"""When downloading running commands ... you want:
+  * Hide the command output and just show a summary info (False)
+  * Show the original command output + summary info (True)"""
+      )
+
       print_log("""
 Examples of commands:
 
 > ~/.dotfiles/install.py
 > ~/.dotfiles/install.py --environment laptop -o True
-> ~/.dotfiles/install.py --overwrite None
+> ~/.dotfiles/install.py --overwrite None -s False
 """)
       exit()
 
@@ -97,6 +114,9 @@ Examples of commands:
     
     elif opt in ("-o", "--overwrite") and arg in overwrite_params:
       overwrite = arg
+    
+    elif opt in ("-s", "--show_commands") and arg in show_commands_params:
+      show_commands = arg
 
     else:
       print_params_error_message()
@@ -110,17 +130,24 @@ Examples of commands:
   elif overwrite == "false":
     overwrite = False 
 
+  if show_commands == "true":
+    show_commands = True
+  elif show_commands == "false":
+    show_commands = False 
+
+  params = {
+    "environment": environment,
+    "overwrite": overwrite,
+    "show_commands": show_commands
+  }
+
   # Logging params
   
   print_log_box("Arguments selected")
-  print_log_status(0, f"environment = {environment}", 0)
-  print_log_status(0, f"overwrite = {overwrite}", 0)
+  for key, value in params.items(): print_log_status(0, f"{key} = {value}", 0)
   print_log_box()
   
-  return {
-    "environment": environment,
-    "overwrite": overwrite
-  }
+  return params
 
 def convert_overwrite_to_bool(arg_value, default_value):
   if arg_value == True or arg_value == False:
