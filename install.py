@@ -12,7 +12,7 @@ from Utils.print_log import print_log, print_header, print_log_box, print_log_st
 from Utils.get_args import get_args
 from Utils.colors import colors
 
-from InstallationScripts import yay, alacritty, awesome, zsh, others
+from InstallationScripts import arch, yay, alacritty, awesome, zsh, others
 
 _root_path = dirname(path.realpath(__file__))
 _home = expanduser("~")
@@ -50,6 +50,7 @@ print_log_status(0, f"For a detailed log of everything (like commands output) ch
 
 print_log_box()
 
+arch.configure(CONSTANTS, args)
 yay.installAndUpdate(CONSTANTS, args)
 
 alacritty.installAndConfigure(CONSTANTS, args)

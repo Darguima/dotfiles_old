@@ -1,0 +1,8 @@
+# Static table lookup for hostnames.
+# See hosts(5) for details.
+
+192.168.1.70  archDesktop
+192.168.1.71  raspberry
+192.168.1.71  dsgdevbraga.ddns.net
+192.168.1.72  archLaptop
+192.168.1.73  myPhone
