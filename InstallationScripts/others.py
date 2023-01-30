@@ -1,6 +1,5 @@
 from Utils.print_log import print_log_box, print_log_status
 from Utils.install_package import install_package
-from Utils.run_command import run_command
 
 """
   Templates:
@@ -50,18 +49,11 @@ def installAndConfigure(CONSTANTS: dict, args: dict):
   install_package("networkmanager", print_status=False)
 
   # Graphics (Xorg)
-  print_log_status(1, f"Installing xorg-server")
-  install_package("xorg-server", print_status=False)
-  
   print_log_status(1, f"Installing xorg-xrandr")
   install_package("xorg-xrandr", print_status=False)
 
   print_log_status(1, f"Installing arandr")
   install_package("arandr", print_status=False)
-
-  if "nvidia" in run_command("lspci | grep VGA")[1].lower():
-    print_log_status(1, f"Installing nvidia")
-    install_package("nvidia", print_status=False)
 
   # Video and Sound:
   print_log_status(1, f"Installing alsa-utils")
@@ -88,12 +80,6 @@ def installAndConfigure(CONSTANTS: dict, args: dict):
 
   print_log_status(1, f"Installing ufw")
   install_package("ufw", print_status=False)
-
-  print_log_status(1, f"Installing syncthing")
-  print_log_status(1, f"Installing dependency c++utilities", indentation=2)
-  print_log_status(1, f"Installing dependency qtforkawesome", indentation=2)
-  print_log_status(1, f"Installing dependency syncthingtray", indentation=2)
-  install_package("syncthing", ["c++utilities", "qtforkawesome", "syncthingtray"], print_status=False)
 
   # Coding:
   print_log_status(1, f"Installing vim")
