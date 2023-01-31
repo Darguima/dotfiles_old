@@ -1,7 +1,7 @@
 from Utils.print_log import print_log_status
 from Utils.run_command import run_command
 
-def install_package(package_name: str, package_dependencies: list[str] = [], print_status = False):
+def install_package(package_name: str, package_dependencies: list[str] = [], print_status = True):
   """
   Install a pacman/AUR package. 
 
