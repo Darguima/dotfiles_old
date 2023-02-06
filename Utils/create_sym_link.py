@@ -2,7 +2,7 @@ from Utils.run_command import run_command
 from os import makedirs
 from os.path import dirname
 
-def create_sym_link(source_file: str, dest_file: str, sudo: bool = False):
+def create_sym_link(source_file: str, dest_file: str, sudo: bool = False, dest_is_directory: bool = False):
   """
   Create a symbolic link file. Can be used to link the dotfiles.
 
@@ -15,9 +15,15 @@ def create_sym_link(source_file: str, dest_file: str, sudo: bool = False):
     The destination file where will be created a link to the source file.
   
   sudo : bool , optional
-    Tu run the command as root, set to True
+    To run the command as root, set to True
+    Default: False
+
+  dest_is_directory : bool , optional
+    If the `dest_file` is actually a directory, and not the file name to the link.
+    This will create a link file with the same name of `source_file` on the target directory.
     Default: False
   """
   
-  makedirs(dirname(dest_file), exist_ok=True)
-  run_command(f"{'sudo' if sudo else ''} ln -sfT {source_file} {dest_file}")
+  parent_dir = dirname(dest_file) if not dest_is_directory else dest_file
+  makedirs(parent_dir, exist_ok=True)
+  run_command(f"{'sudo' if sudo else ''} ln -sf {source_file} {'-T' if not dest_is_directory else '-t'} {dest_file}")

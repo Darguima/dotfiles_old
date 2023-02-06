@@ -48,13 +48,6 @@ def installAndConfigure(CONSTANTS: dict, args: dict):
   print_log_status(1, f"Installing networkmanager")
   install_package("networkmanager", print_status=False)
 
-  # Graphics (Xorg)
-  print_log_status(1, f"Installing xorg-xrandr")
-  install_package("xorg-xrandr", print_status=False)
-
-  print_log_status(1, f"Installing arandr")
-  install_package("arandr", print_status=False)
-
   # Video and Sound:
   print_log_status(1, f"Installing alsa-utils")
   install_package("alsa-utils", print_status=False)
