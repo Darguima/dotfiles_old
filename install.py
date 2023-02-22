@@ -12,7 +12,7 @@ from Utils.print_log import print_log, print_header, print_log_box, print_log_st
 from Utils.get_args import get_args
 from Utils.colors import colors
 
-from InstallationScripts import arch, yay, alacritty, awesome, zsh, xorg, arandr, syncthing, others
+from InstallationScripts import arch, yay, zsh, xorg, lightdm, awesome, arandr, alacritty, syncthing, others
 
 _root_path = dirname(path.realpath(__file__))
 _home = expanduser("~")
@@ -53,11 +53,12 @@ print_log_box()
 arch.configure(CONSTANTS, args)
 yay.installAndUpdate(CONSTANTS, args)
 
-alacritty.installAndConfigure(CONSTANTS, args)
 zsh.installAndConfigure(CONSTANTS, args)
-awesome.installAndConfigure(CONSTANTS, args)
 xorg.installAndConfigure(CONSTANTS, args)
+lightdm.installAndConfigure(CONSTANTS, args)
+awesome.installAndConfigure(CONSTANTS, args)
 arandr.installAndConfigure(CONSTANTS, args)
+alacritty.installAndConfigure(CONSTANTS, args)
 syncthing.installAndConfigure(CONSTANTS, args)
 others.installAndConfigure(CONSTANTS, args)
 
