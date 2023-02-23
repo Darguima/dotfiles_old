@@ -6,7 +6,7 @@ from Utils.run_command import run_command
 def installAndConfigure(CONSTANTS: dict, args: dict):
   print_log_box("xorg")
 
-  dependencies = []
+  dependencies = ["arandr", "xorg-xrandr", "autorandr"]
   if "nvidia" in run_command("lspci | grep VGA")[1].lower():
     dependencies.append("nvidia")
 
@@ -17,6 +17,12 @@ def installAndConfigure(CONSTANTS: dict, args: dict):
   print_log_status(3, "Linking 00-keyboard.conf & 70-touchpad-settings")
   create_sym_link(f"{CONSTANTS['DOTFILES']}/dotfiles/xorg/00-keyboard.conf", "/etc/X11/xorg.conf.d/00-keyboard.conf", sudo=True)
   create_sym_link(f"{CONSTANTS['DOTFILES']}/dotfiles/xorg/70-touchpad-settings", "/etc/X11/xorg.conf.d/70-touchpad-settings", sudo=True)
+
+  print_log_status(3, "Linking .screenlayouts folder's files (arandr)")
+  create_sym_link(f"{CONSTANTS['DOTFILES']}/dotfiles/xorg/arandr/*", f"{CONSTANTS['HOME']}/.screenlayout", dest_is_directory=True)
+
+  print_log_status(3, "Linking autorandr profiles to /etc/xdg/autorandr")
+  create_sym_link(f"{CONSTANTS['DOTFILES']}/dotfiles/xorg/autorandr/*", f"/etc/xdg/autorandr", dest_is_directory=True, sudo=True)
   
   print_log_status(4)
 

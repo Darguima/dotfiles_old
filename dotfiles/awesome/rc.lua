@@ -557,6 +557,3 @@ awful.spawn.with_shell("kdeconnect-indicator")
 awful.spawn.with_shell("libinput-gestures-setup start")
 awful.spawn.with_shell("xautolock -time 10 -locker \"/usr/bin/lockscreen\"")
 
--- Run the correct 'arandr script' to each environment
-awful.spawn.with_shell("~/.screenlayout/" .. dotfiles_environment .."_default.sh")
-
