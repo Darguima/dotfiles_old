@@ -92,6 +92,9 @@ def installAndConfigure(CONSTANTS: dict, args: dict):
   print_log_status(1, f"Installing wget")
   install_package("wget", print_status=False)
 
+  # print_log_status(1, f"Installing wine (wine-gecko + wine-mono)")
+  # install_package("wine-stable", ["wine-gecko", "wine-mono"], print_status=False)
+
   # Apps:
   print_log_status(1, f"Installing firefox")
   install_package("firefox", print_status=False)
@@ -110,6 +113,9 @@ def installAndConfigure(CONSTANTS: dict, args: dict):
 
   print_log_status(1, f"Installing obs-studio")
   install_package("obs-studio", print_status=False)
+
+  print_log_status(1, f"Installing steam")
+  install_package("steam", print_status=False)
 
   # Others:
   print_log_status(1, f"Installing deja-dup")

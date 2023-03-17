@@ -20,7 +20,9 @@ $ git clone git@github.com:Darguima/dotfiles.git ~/.dotfiles
 
 ### Install 🚀
 
-Run the install script:
+First, start by enabling [multilib](https://wiki.archlinux.org/title/Official_repositories#multilib) on pacman.
+
+Then, run the install script:
 
 ```
 $ ~/.dotfiles/install.py
