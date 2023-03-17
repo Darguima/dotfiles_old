@@ -6,7 +6,9 @@ from Utils.run_command import run_command
 def installAndConfigure(CONSTANTS: dict, args: dict):
   print_log_box("syncthing")
 
-  install_package("syncthing", ["c++utilities", "qtforkawesome", "syncthingtray"])
+  # install_package("syncthing", ["c++utilities", "qtforkawesome", "syncthingtray"])
+  install_package("syncthing")
+  print_log_status(3, "syncthingtray was not installed")
 
   print_log_status(3)
 
