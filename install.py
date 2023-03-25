@@ -1,6 +1,6 @@
 #! /usr/bin/python3
 
-from os import makedirs, path, chdir
+from os import path, chdir
 from os.path import dirname, expanduser
 from shutil import rmtree
 
@@ -10,6 +10,7 @@ from Utils.run_command import run_command_init
 from Utils.request_sudo import request_sudo
 from Utils.print_log import print_log, print_header, print_log_box, print_log_status
 from Utils.get_args import get_args
+from Utils.mkdir import mkdir
 from Utils.colors import colors
 
 from InstallationScripts import arch, yay, zsh, xorg, lightdm, awesome, alacritty, syncthing, others
@@ -35,7 +36,7 @@ Fix: sometimes, when canceling this script, and rerunning it, a permission error
 """
 if path.isdir(f"{CONSTANTS['TEMP_PATH']}"):
   rmtree(CONSTANTS["TEMP_PATH"])
-makedirs(CONSTANTS["TEMP_PATH"])
+mkdir(CONSTANTS["TEMP_PATH"])
 
 print_header()
 
@@ -51,9 +52,9 @@ print_log_status(0, f"For a detailed log of everything (like commands output) ch
 print_log_box()
 
 arch.configure(CONSTANTS, args)
-yay.installAndUpdate(CONSTANTS, args)
+# yay.installAndUpdate(CONSTANTS, args)
 
-zsh.installAndConfigure(CONSTANTS, args)
+# zsh.installAndConfigure(CONSTANTS, args)
 xorg.installAndConfigure(CONSTANTS, args)
 lightdm.installAndConfigure(CONSTANTS, args)
 awesome.installAndConfigure(CONSTANTS, args)

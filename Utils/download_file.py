@@ -1,7 +1,7 @@
 from Utils.errorExit import exit_with_error
 from Utils.run_command import run_command
 from os.path import exists, dirname
-# from os import makedirs
+from Utils.mkdir import mkdir
 
 # import urllib.request
 
@@ -40,8 +40,7 @@ def download_file(url: str, dst_file: str, overwrite: bool = False, sudo = False
   
   parent_folder = dirname(dst_file)
   try:
-    # makedirs(parent_folder, exist_ok=True)
-    run_command(f"{'sudo' if sudo else ''} mkdir -p {parent_folder}")
+    mkdir(parent_folder, sudo=sudo)
   except Exception as err:
     exit_with_error("Error creating the parent path.", err)
   

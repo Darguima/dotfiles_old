@@ -1,4 +1,5 @@
 from Utils.run_command import run_command
+from Utils.mkdir import mkdir
 from os.path import dirname
 
 def create_sym_link(source_file: str, dest_file: str, sudo: bool = False, dest_is_directory: bool = False):
@@ -24,5 +25,5 @@ def create_sym_link(source_file: str, dest_file: str, sudo: bool = False, dest_i
   """
   
   parent_dir = dirname(dest_file) if not dest_is_directory else dest_file
-  run_command(f"{'sudo' if sudo else ''} mkdir -p {parent_dir}")
+  mkdir(parent_dir, sudo=sudo)
   run_command(f"{'sudo' if sudo else ''} ln -sf {source_file} {'-T' if not dest_is_directory else '-t'} {dest_file}")
