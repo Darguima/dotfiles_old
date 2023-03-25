@@ -2,8 +2,8 @@ from Utils.print_log import print_log_box, print_log_status
 from Utils.install_package import install_package
 from Utils.create_sym_link import create_sym_link
 from Utils.git_clone import git_clone
-from Utils.run_command import run_command
 from Utils.get_args import convert_overwrite_to_bool
+from Utils.systemctl import systemctl
 
 def installAndConfigure(CONSTANTS: dict, args: dict):
   print_log_box("awesome")
@@ -15,8 +15,7 @@ def installAndConfigure(CONSTANTS: dict, args: dict):
 
   print_log_status(3)
 
-  print_log_status(3, "Enabling `acpid`")
-  run_command("sudo systemctl enable acpid")
+  systemctl.enable("acpid")
 
   print_log_status(3, "Cloning awesome widgets")
   git_clone(
