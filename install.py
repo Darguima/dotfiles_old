@@ -52,9 +52,9 @@ print_log_status(0, f"For a detailed log of everything (like commands output) ch
 print_log_box()
 
 arch.configure(CONSTANTS, args)
-# yay.installAndUpdate(CONSTANTS, args)
+yay.installAndUpdate(CONSTANTS, args)
 
-# zsh.installAndConfigure(CONSTANTS, args)
+zsh.installAndConfigure(CONSTANTS, args)
 xorg.installAndConfigure(CONSTANTS, args)
 lightdm.installAndConfigure(CONSTANTS, args)
 awesome.installAndConfigure(CONSTANTS, args)
