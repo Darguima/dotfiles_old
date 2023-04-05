@@ -13,7 +13,7 @@ from Utils.get_args import get_args
 from Utils.mkdir import mkdir
 from Utils.colors import colors
 
-from InstallationScripts import arch, yay, zsh, xorg, lightdm, awesome, alacritty, syncthing, gimp, obs, ufw, others
+from InstallationScripts import arch, yay, zsh, xorg, qt, lightdm, awesome, alacritty, syncthing, gimp, obs, ufw, others
 
 _root_path = dirname(path.realpath(__file__))
 _home = expanduser("~")
@@ -56,6 +56,7 @@ yay.installAndUpdate(CONSTANTS, args)
 
 zsh.installAndConfigure(CONSTANTS, args)
 xorg.installAndConfigure(CONSTANTS, args)
+qt.installAndConfigure(CONSTANTS, args)
 lightdm.installAndConfigure(CONSTANTS, args)
 awesome.installAndConfigure(CONSTANTS, args)
 alacritty.installAndConfigure(CONSTANTS, args)

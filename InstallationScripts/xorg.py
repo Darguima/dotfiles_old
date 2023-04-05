@@ -23,6 +23,9 @@ def installAndConfigure(CONSTANTS: dict, args: dict):
 
   print_log_status(3, "Linking autorandr profiles to /etc/xdg/autorandr")
   create_sym_link(f"{CONSTANTS['DOTFILES']}/dotfiles/xorg/autorandr/*", f"/etc/xdg/autorandr", sudo=True)
+
+  print_log_status(3, "Linking `~/.xprofile`")
+  create_sym_link(f"{CONSTANTS['DOTFILES']}/dotfiles/xorg/xprofile", f"{CONSTANTS['HOME']}", ".xprofile")
   
   print_log_status(4)
 
