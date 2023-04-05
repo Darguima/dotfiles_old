@@ -99,9 +99,6 @@ def installAndConfigure(CONSTANTS: dict, args: dict):
   print_log_status(1, f"Installing spotify")
   install_package("spotify", print_status=False)
 
-  print_log_status(1, f"Installing gimp")
-  install_package("gimp", print_status=False)
-
   print_log_status(1, f"Installing discord")
   install_package("discord", print_status=False)
 
