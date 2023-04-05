@@ -12,7 +12,7 @@ def installAndConfigure(CONSTANTS: dict, args: dict):
   print_log_status(3)
 
   print_log_status(3, "Linking `file`")
-  # create_sym_link(f"{CONSTANTS['DOTFILES']}/dotfiles/", f"{CONSTANTS['HOME']}/.config")
+  # create_sym_link(f"{CONSTANTS['DOTFILES']}/dotfiles/", f"{CONSTANTS['HOME']}/.config", "")
   
   print_log_status(4)
 

@@ -11,7 +11,7 @@ def installAndConfigure(CONSTANTS: dict, args: dict):
   print_log_status(3)
 
   print_log_status(3, f"Linking {args['environment']}@{colors.UNDERLINE}alacritty.yml{colors.ENDC}")
-  create_sym_link(f"{CONSTANTS['DOTFILES']}/dotfiles/alacritty/{args['environment']}@alacritty.yml", f"{CONSTANTS['HOME']}/.config/alacritty/alacritty.yml")
+  create_sym_link(f"{CONSTANTS['DOTFILES']}/dotfiles/alacritty/{args['environment']}@alacritty.yml", f"{CONSTANTS['HOME']}/.config/alacritty", "alacritty.yml")
   
   print_log_status(4)
 

@@ -61,8 +61,8 @@ def installAndConfigure(CONSTANTS: dict, args: dict):
   environment_file.close()
 
   print_log_status(3, "Linking dotfiles (zshrc & p10k.zsh)")
-  create_sym_link(f"{CONSTANTS['DOTFILES']}/dotfiles/zsh/zshrc", f"{CONSTANTS['HOME']}/.zshrc")
-  create_sym_link(f"{CONSTANTS['DOTFILES']}/dotfiles/zsh/p10k.zsh", f"{CONSTANTS['HOME']}/.p10k.zsh")
+  create_sym_link(f"{CONSTANTS['DOTFILES']}/dotfiles/zsh/zshrc", f"{CONSTANTS['HOME']}", ".zshrc")
+  create_sym_link(f"{CONSTANTS['DOTFILES']}/dotfiles/zsh/p10k.zsh", f"{CONSTANTS['HOME']}", ".p10k.zsh")
   
   print_log_status(4)
 

@@ -13,7 +13,7 @@ def installAndConfigure(CONSTANTS: dict, args: dict):
   print_log_status(3)
 
   print_log_status(3, "Linking `lightdm.conf`")
-  create_sym_link(f"{CONSTANTS['DOTFILES']}/dotfiles/lightdm/lightdm.conf", f"/etc/lightdm/lightdm.conf", sudo=True)
+  create_sym_link(f"{CONSTANTS['DOTFILES']}/dotfiles/lightdm/lightdm.conf", f"/etc/lightdm", "lightdm.conf", sudo=True)
   
   print_log_status(4)
 
