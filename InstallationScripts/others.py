@@ -105,9 +105,6 @@ def installAndConfigure(CONSTANTS: dict, args: dict):
   print_log_status(1, f"Installing figma-linux")
   install_package("figma-linux", print_status=False)
 
-  print_log_status(1, f"Installing obs-studio")
-  install_package("obs-studio", print_status=False)
-
   print_log_status(1, f"Installing steam")
   install_package("steam", print_status=False)
 
