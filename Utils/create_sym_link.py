@@ -1,29 +1,65 @@
 from Utils.run_command import run_command
+from Utils.remove import remove
 from Utils.mkdir import mkdir
-from os.path import dirname
+from os.path import exists, dirname
 
-def create_sym_link(source_file: str, dest_file: str, sudo: bool = False, dest_is_directory: bool = False):
-  """
-  Create a symbolic link file. Can be used to link the dotfiles.
+def create_sym_link(source_file: str, dest_folder: str, dest_file: str = "", sudo: bool = False):
+    """
+    Create a symbolic link from a file (or all files * ), on a file path.
+    Will overwrite any existent file.
 
-  Parameters
-  ----------
-  source_file : str
-    The source file to be linked on the destination folder.
+    Usage
+    ----------
+    create_sym_link("~/test/f1/1.txt", "~/test/f2")
+    Links the file `~/test/f1/1.txt` on the file `~/test/f2/1.txt`
 
-  dest_file : str
-    The destination file where will be created a link to the source file.
-  
-  sudo : bool , optional
-    To run the command as root, set to True
-    Default: False
+    create_sym_link("~/test/f1/1.txt", "~/test/f2", "2.txt")
+    Links the file `~/test/f1/1.txt` on the file `~/test/f2/2.txt`
 
-  dest_is_directory : bool , optional
-    If the `dest_file` is actually a directory, and not the file name to the link.
-    This will create a link file with the same name of `source_file` on the target directory.
-    Default: False
-  """
-  
-  parent_dir = dirname(dest_file) if not dest_is_directory else dest_file
-  mkdir(parent_dir, sudo=sudo)
-  run_command(f"{'sudo' if sudo else ''} ln -sf {source_file} {'-T' if not dest_is_directory else '-t'} {dest_file}")
+    create_sym_link("~/test/f1/*", "~/test/f2")
+    Links all the files in `~/test/f1/` on the `~/test/f2` folder (the files will have te same name)
+
+    Parameters
+    ----------
+    source_file : str
+      The source file to be linked on the destination folder.
+
+    dest_folder : str
+      The destination folder where the links files gonna be created.
+
+    dest_file : str , optional
+      The destination file that gonna be create inside `dest_folder`.
+      If not given will be used the source file name.
+    
+    sudo : bool , optional
+      To run the command as root, set to True
+      Default: False
+    """
+
+    if (not exists(dest_folder)): mkdir(dest_folder)
+
+    run_command(f"{'sudo' if sudo else ''} ln -sf {source_file} {dest_folder}/{dest_file}")
+
+def create_folder_link(source_folder: str, dst_folder: str, sudo: bool = False):
+    """
+    Create a symbolic link from a folder to other folder.
+    Will delete any existent file and folder on the `dst_folder`.
+
+    Parameters
+    ----------
+    source_folder : str
+      The source folder to be linked on the destination folder.
+
+    dst_folder : str
+      The destination folder where the linked folder gonna be created.
+      All files that are childs of this path gonna be removed.
+
+    sudo : bool , optional
+      To run the command as root, set to True
+      Default: False
+    """
+
+    if (not exists(dirname(dst_folder))): mkdir(dirname(dst_folder))
+    remove(dst_folder, sudo=sudo)
+    
+    run_command(f"{'sudo' if sudo else ''} ln -sf {source_folder} {dst_folder}")
