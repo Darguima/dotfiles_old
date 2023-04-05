@@ -71,9 +71,6 @@ def installAndConfigure(CONSTANTS: dict, args: dict):
   print_log_status(1, f"Installing kdeconnect")
   install_package("kdeconnect", print_status=False)
 
-  print_log_status(1, f"Installing ufw")
-  install_package("ufw", print_status=False)
-
   # Coding:
   print_log_status(1, f"Installing vim")
   install_package("vim", print_status=False)
