@@ -36,7 +36,7 @@ def create_sym_link(source_file: str, dest_folder: str, dest_file: str = "", sud
       Default: False
     """
 
-    if (not exists(dest_folder)): mkdir(dest_folder)
+    if (not exists(dest_folder)): mkdir(dest_folder, sudo=sudo)
 
     run_command(f"{'sudo' if sudo else ''} ln -sf {source_file} {dest_folder}/{dest_file}")
 
@@ -59,7 +59,7 @@ def create_folder_link(source_folder: str, dst_folder: str, sudo: bool = False):
       Default: False
     """
 
-    if (not exists(dirname(dst_folder))): mkdir(dirname(dst_folder))
+    if (not exists(dirname(dst_folder))): mkdir(dirname(dst_folder), sudo=sudo)
     remove(dst_folder, sudo=sudo)
     
     run_command(f"{'sudo' if sudo else ''} ln -sf {source_folder} {dst_folder}")
