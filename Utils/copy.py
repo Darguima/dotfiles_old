@@ -1,4 +1,6 @@
 from Utils.run_command import run_command
+from Utils.mkdir import mkdir
+from os.path import exists, dirname
 
 def copy(src: str, dst: str, sudo: bool = False):
   """
@@ -17,4 +19,5 @@ def copy(src: str, dst: str, sudo: bool = False):
       Needs run the command as root?
   """
 
+  if (not exists(dirname(dst))): mkdir(dirname(dst), sudo=sudo)
   run_command(f"{'sudo' if sudo else ''} cp -r {src} {dst}")
