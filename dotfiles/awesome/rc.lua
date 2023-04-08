@@ -21,7 +21,6 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
-local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
@@ -76,37 +75,23 @@ modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-    awful.layout.suit.tile,
-    awful.layout.suit.floating,
     -- awful.layout.suit.tile.left,
     -- awful.layout.suit.tile.bottom,
     -- awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
+    -- awful.layout.suit.fair,
+    -- awful.layout.suit.fair.horizontal,
+    -- awful.layout.suit.spiral,
     -- awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.max,
+    -- awful.layout.suit.max,
     -- awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier,
+    -- awful.layout.suit.magnifier,
     awful.layout.suit.corner.nw,
-    awful.layout.suit.corner.ne,
-    awful.layout.suit.corner.sw,
-    awful.layout.suit.corner.se,
+    -- awful.layout.suit.corner.ne,
+    -- awful.layout.suit.corner.sw,
+    -- awful.layout.suit.corner.se,
+    awful.layout.suit.floating,
+    awful.layout.suit.tile,
 }
--- }}}
-
--- {{{ Menu
--- Create a launcher widget and a main menu
-myawesomemenu = {
---    { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
---    { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", function() awesome.quit() end },
-}
-
--- Menubar configuration
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
 -- {{{ Wibar
@@ -151,7 +136,6 @@ local tasklist_buttons = gears.table.join(
                                           end),
                      awful.button({ }, 5, function ()
                                               awful.client.focus.byidx(-1)
-
                                           end))
 
 local function set_wallpaper(s)
@@ -174,7 +158,6 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-
     awful.tag({ "1", "2", "3", "4", "5", "6" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
@@ -203,9 +186,10 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "bottom", screen = s })
-    
+
     -- Add widgets to the wibox
 
+    -- My widgets
     if dotfiles_environment == "laptop" then
         battery_widget = require("battery-widget") {}
         brightness_widget = require("brightness")({backend = "xbacklight"}).widget
@@ -233,7 +217,7 @@ end)
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
+    awful.button({ }, 3, function ()  end), -- write on this function what you want that happens on right mouse click
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
 ))
@@ -276,8 +260,6 @@ globalkeys = gears.table.join(
         end,
         {description = "focus previous by index", group = "client"}
     ),
-    awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
-              {description = "show main menu", group = "awesome"}),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx(  1)    end,
@@ -349,10 +331,7 @@ globalkeys = gears.table.join(
                     history_path = awful.util.get_cache_dir() .. "/history_eval"
                   }
               end,
-              {description = "lua execute prompt", group = "awesome"}),
-    -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+              {description = "lua execute prompt", group = "awesome"})
 )
 
 clientkeys = gears.table.join(
@@ -363,7 +342,7 @@ clientkeys = gears.table.join(
         end,
         {description = "toggle fullscreen", group = "client"}),
     awful.key({ modkey            }, "q",      function (c) c:kill()                         end,
-              {description = "close", group = "client"}),
+        {description = "close", group = "client"}),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
               {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
@@ -540,10 +519,14 @@ client.connect_signal("manage", function (c)
     end
 end)
 
+-- Enable sloppy focus, so that focus follows mouse.
+client.connect_signal("mouse::enter", function(c)
+    c:emit_signal("request::activate", "mouse_enter", {raise = false})
+end)
+
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
-
 
 -- {{{ Autostart
 -- Applets
