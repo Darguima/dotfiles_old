@@ -36,6 +36,7 @@ def installAndConfigure(CONSTANTS: dict, args: dict):
 
   print_log_status(3, "Linking `darguima-theme` folder")
   create_folder_link(f"{CONSTANTS['DOTFILES']}/dotfiles/awesome/darguima-theme", f"{CONSTANTS['HOME']}/.config/awesome/themes/darguima-theme")
+  create_folder_link(f"{CONSTANTS['DOTFILES']}/dotfiles/awesome/darguima-wibar", f"{CONSTANTS['HOME']}/.config/awesome/darguima-wibar")
   
   print_log_status(4)
 

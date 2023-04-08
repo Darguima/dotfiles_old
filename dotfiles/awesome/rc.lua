@@ -1,5 +1,7 @@
 -- {{{ My modules
 
+local darguima_wibar = require("darguima-wibar")
+
 -- dotfiles_environment = `desktop`, `laptop` or ...
 -- Why? In `desktop`, for example, isn't needed to load battery or brightness widgtes.
 require("get-dotfiles-environment")
@@ -180,7 +182,7 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "bottom", screen = s })
+    s.mywibox = darguima_wibar.create(beautiful)
 
     -- Add widgets to the wibox
     if dotfiles_environment == "laptop" then
