@@ -1,15 +1,16 @@
----------------------------------
---  "Darguima" awesome theme   --
--- Forked from "Zenburn" theme --
---    By Dário G. (darguima)   --
----------------------------------
+----------------------------------
+--   "Darguima" awesome theme   --
+--  Forked from "Zenburn" theme --
+-- & Based on u/drakfire86 rice --
+--    By Dário G. (darguima)    --
+----------------------------------
 
-local themes_path = require("gears.filesystem").get_themes_dir()
+local themes_path = os.getenv("HOME") .. "/.config/awesome/themes/darguima-theme"
 local dpi = require("beautiful.xresources").apply_dpi
 
 -- {{{ Main
 local theme = {}
-theme.wallpaper = themes_path .. "darguima-theme/zenburn-background.png"
+theme.wallpaper = themes_path .. "darguima-theme/darguima-background.png"
 -- }}}
 
 -- {{{ Styles

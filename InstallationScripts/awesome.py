@@ -35,7 +35,7 @@ def installAndConfigure(CONSTANTS: dict, args: dict):
   create_sym_link(f"{CONSTANTS['DOTFILES']}/dotfiles/awesome/lockscreen", "/usr/bin", "lockscreen", sudo=True)
 
   print_log_status(3, "Linking `darguima-theme` folder")
-  create_folder_link(f"{CONSTANTS['DOTFILES']}/dotfiles/awesome/darguima-theme", f"/usr/share/awesome/themes/darguima-theme", sudo=True)
+  create_folder_link(f"{CONSTANTS['DOTFILES']}/dotfiles/awesome/darguima-theme", f"{CONSTANTS['HOME']}/.config/awesome/themes/darguima-theme")
   
   print_log_status(4)
 

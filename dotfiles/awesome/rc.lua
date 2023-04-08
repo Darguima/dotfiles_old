@@ -53,7 +53,8 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_themes_dir() .. "darguima-theme/theme.lua")
+beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/darguima-theme/theme.lua")
+-- beautiful.init(gears.filesystem.get_themes_dir() .. "darguima-theme/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
@@ -245,6 +246,10 @@ globalkeys = gears.table.join(
         {description = "focus next by index", group = "client"}),
     awful.key({ modkey,           }, "j", function () awful.client.focus.byidx(-1) end,
         {description = "focus previous by index", group = "client"}),
+    
+    awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
+        {description = "jump to urgent client", group = "client"}),
+
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx(  1)    end,
@@ -256,7 +261,7 @@ globalkeys = gears.table.join(
               {description = "increase master width factor", group = "layout"}),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)          end,
               {description = "decrease master width factor", group = "layout"}),
-
+    
     awful.key({ modkey,           }, "Tab",
         function ()
             awful.client.focus.history.previous()
