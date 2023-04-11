@@ -5,6 +5,9 @@
 --    By Dário G. (darguima)    --
 ----------------------------------
 
+-- https://awesomewm.org/doc/api/libraries/beautiful.html
+-- https://awesomewm.org/doc/api/classes/awful.widget.tasklist.html
+
 local theme_path = os.getenv("HOME") .. "/.config/awesome/themes/darguima-theme/"
 local dpi = require("beautiful.xresources").apply_dpi
 
