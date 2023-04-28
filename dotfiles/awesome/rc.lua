@@ -22,7 +22,7 @@ error_handling()
 
 -- {{{ Variable definitions
 beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/darguima-theme/theme.lua")
--- beautiful.init(gears.filesystem.get_themes_dir() .. "darguima-theme/theme.lua")
+-- beautiful.init(require("gears").filesystem.get_themes_dir() .. "default/theme.lua")
 
 terminal = "alacritty"
 editor = os.getenv("EDITOR") or "vim"
