@@ -556,4 +556,5 @@ awful.spawn.with_shell("kdeconnect-indicator")
 -- Others
 awful.spawn.with_shell("libinput-gestures-setup start")
 awful.spawn.with_shell("xautolock -time 10 -locker \"/usr/bin/lockscreen\"")
+awful.spawn.with_shell("picom")
 
