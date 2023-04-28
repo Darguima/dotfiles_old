@@ -9,6 +9,80 @@ local gears = require("gears")
 
 -- https://awesomewm.org/doc/api/classes/awful.wibar.html
 
+-- Taglist Mouse events
+local taglist_buttons = gears.table.join(
+  awful.button({}, 1, function(t) t:view_only() end)
+)
+
+-- Tasklist Mouse events
+local tasklist_buttons = gears.table.join(
+
+  awful.button({}, 1, function(c)
+    c:emit_signal(
+      "request::activate",
+      "tasklist",
+      { raise = true }
+    )
+  end),
+
+  awful.button({}, 3, function()
+    awful.menu.client_list()
+  end)
+)
+
+local function add_widgets_to_wibox(screen)
+  if DotfilesEnvironment == "laptop" then
+    BatteryWidget = require("battery-widget") {}
+    BrightnessWidget = require("brightness")({ backend = "xbacklight" }).widget
+  end
+
+  -- Each screen has its own tag table.
+  awful.tag({ "1", "2", "3", "4", "5", "6" }, screen, awful.layout.layouts[1])
+  -- Create a taglist widget
+  screen.mytaglist = awful.widget.taglist {
+    screen  = screen,
+    filter  = awful.widget.taglist.filter.all,
+    buttons = taglist_buttons
+  }
+
+  -- Create a promptbox for each screen
+  screen.mypromptbox = awful.widget.prompt()
+
+  -- Create an imagebox widget which will contain an icon indicating which layout we're using.
+  screen.mylayoutbox = awful.widget.layoutbox(screen)
+
+  -- Create a tasklist widget
+  screen.mytasklist = awful.widget.tasklist {
+    screen  = screen,
+    filter  = awful.widget.tasklist.filter.currenttags,
+    buttons = tasklist_buttons
+  }
+
+  screen.mywibox:setup {
+    layout = wibox.layout.align.horizontal,
+    {
+      -- Left widgets
+      layout = wibox.layout.fixed.horizontal,
+      screen.mytaglist,
+      screen.mypromptbox,
+    },
+
+    screen.mytasklist, -- Middle widget
+
+    {
+      -- Right widgets
+      layout = wibox.layout.fixed.horizontal,
+      wibox.widget.systray(),
+      BatteryWidget,
+      BrightnessWidget,
+      wibox.widget.textclock(),
+      screen.mylayoutbox,
+    },
+  }
+
+  return screen
+end
+
 local function create(screen, theme)
   screen.mywibox = awful.wibar({
     position = "bottom", -- string The position.
@@ -37,111 +111,11 @@ local function create(screen, theme)
 
   })
 
-  return screen
-end
-
--- Create a textclock widget
-mytextclock = wibox.widget.textclock()
-
--- Create a wibox for each screen and add it
-local taglist_buttons = gears.table.join(
-  awful.button({}, 1, function(t) t:view_only() end),
-  awful.button({ modkey }, 1, function(t)
-    if client.focus then
-      client.focus:move_to_tag(t)
-    end
-  end),
-  awful.button({}, 3, awful.tag.viewtoggle),
-  awful.button({ modkey }, 3, function(t)
-    if client.focus then
-      client.focus:toggle_tag(t)
-    end
-  end),
-  awful.button({}, 4, function(t) awful.tag.viewnext(t.screen) end),
-  awful.button({}, 5, function(t) awful.tag.viewprev(t.screen) end)
-)
-
-local tasklist_buttons = gears.table.join(
-  awful.button({}, 1, function(c)
-    if c == client.focus then
-      c.minimized = true
-    else
-      c:emit_signal(
-        "request::activate",
-        "tasklist",
-        { raise = true }
-      )
-    end
-  end),
-  awful.button({}, 3, function()
-    awful.menu.client_list({ theme = { width = 250 } })
-  end),
-  awful.button({}, 4, function()
-    awful.client.focus.byidx(1)
-  end),
-  awful.button({}, 5, function()
-    awful.client.focus.byidx(-1)
-  end))
-
-local function add_widgets_to_wibox(screen, theme)
-  if DotfilesEnvironment == "laptop" then
-    BatteryWidget = require("battery-widget") {}
-    BrightnessWidget = require("brightness")({ backend = "xbacklight" }).widget
-  end
-
-  -- Each screen has its own tag table.
-  awful.tag({ "1", "2", "3", "4", "5", "6" }, screen, awful.layout.layouts[1])
-
-  -- Create a promptbox for each screen
-  screen.mypromptbox = awful.widget.prompt()
-  -- Create an imagebox widget which will contain an icon indicating which layout we're using.
-  -- We need one layoutbox per screen.
-  screen.mylayoutbox = awful.widget.layoutbox(screen)
-  screen.mylayoutbox:buttons(gears.table.join(
-    awful.button({}, 1, function() awful.layout.inc(1) end),
-    awful.button({}, 3, function() awful.layout.inc(-1) end),
-    awful.button({}, 4, function() awful.layout.inc(1) end),
-    awful.button({}, 5, function() awful.layout.inc(-1) end)))
-  -- Create a taglist widget
-  screen.mytaglist = awful.widget.taglist {
-    screen  = screen,
-    filter  = awful.widget.taglist.filter.all,
-    buttons = taglist_buttons
-  }
-
-  -- Create a tasklist widget
-  screen.mytasklist = awful.widget.tasklist {
-    screen  = screen,
-    filter  = awful.widget.tasklist.filter.currenttags,
-    buttons = tasklist_buttons
-  }
-
-  screen.mywibox:setup {
-    layout = wibox.layout.align.horizontal,
-    {
-      -- Left widgets
-      layout = wibox.layout.fixed.horizontal,
-      screen.mytaglist,
-      screen.mypromptbox,
-    },
-
-    screen.mytasklist, -- Middle widget
-
-    {
-      -- Right widgets
-      layout = wibox.layout.fixed.horizontal,
-      wibox.widget.systray(),
-      BatteryWidget,
-      BrightnessWidget,
-      mytextclock,
-      screen.mylayoutbox,
-    },
-  }
+  screen = add_widgets_to_wibox(screen)
 
   return screen
 end
 
 return {
   create = create,
-  add_widgets_to_wibox = add_widgets_to_wibox
 }

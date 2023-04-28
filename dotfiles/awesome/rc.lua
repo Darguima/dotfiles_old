@@ -36,14 +36,13 @@ awful.layout.layouts = {
     awful.layout.suit.tile,
 }
 
--- {{{ Wibar
+-- Adding Wallpaper and Wibar to all screens
 awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(beautiful, s)
 
-    s = darguima_wibar.create(s, beautiful)
-    s = darguima_wibar.add_widgets_to_wibox(s, beautiful)
+    -- Create a wibar for each screen and add it
+    darguima_wibar.create(s, beautiful)
 end)
--- }}}
 
 -- Keys and Mouse bindings
 root.buttons(bindings.mouse_bindings())
