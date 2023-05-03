@@ -28,6 +28,7 @@ terminal = "alacritty"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 modkey = "Mod4"
+-- }}}
 
 -- Table of layouts
 awful.layout.layouts = {
@@ -57,3 +58,9 @@ signals.clients_signals(beautiful)
 
 -- Start at boot apps & applets
 autostart()
+
+-- Debug:
+-- require("naughty").notify({
+--     title = "Debugging",
+--     text = tostring(screen.centerwibar.x)
+-- })

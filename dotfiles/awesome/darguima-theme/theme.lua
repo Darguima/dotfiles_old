@@ -56,7 +56,7 @@ theme.taglist_squares_unsel                     = theme.confdir .. "/icons/tagli
 theme.tasklist_plain_task_name                  = false
 theme.tasklist_disable_icon                     = false
 theme.tasklist_disable_task_name                = true
-theme.useless_gap                               = dpi(0)
+theme.useless_gap                               = dpi(2)
 -- Layouts Icons
 theme.layout_tile                               = theme.confdir .. "/icons/layouts/tile.png"
 theme.layout_tileleft                           = theme.confdir .. "/icons/layouts/tileleft.png"
