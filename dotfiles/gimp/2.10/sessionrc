@@ -11,20 +11,19 @@
     (size 640 480))
 (session-info "toplevel"
     (factory-entry "gimp-single-image-window")
-    (position 2 2)
-    (size 1912 1048)
-    (monitor 1)
+    (position 4 29)
+    (size 1908 1043)
     (open-on-exit)
     (aux-info
         (left-docks-width "44")
-        (right-docks-width "205")
+        (right-docks-width "209")
         (maximized "no"))
     (gimp-toolbox
         (side left))
     (gimp-dock
         (side right)
         (book
-            (current-page 1)
+            (current-page 0)
             (dockable "gimp-tool-options"
                 (tab-style automatic)
                 (aux-info
