@@ -20,4 +20,4 @@ def copy(src: str, dst: str, sudo: bool = False):
   """
 
   if (not exists(dirname(dst))): mkdir(dirname(dst), sudo=sudo)
-  run_command(f"{'sudo' if sudo else ''} cp -r {src} {dst}")
+  run_command(f"{'sudo' if sudo else ''} cp -rT {src} {dst}")
