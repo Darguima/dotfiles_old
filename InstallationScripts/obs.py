@@ -9,7 +9,7 @@ def installAndConfigure(CONSTANTS: dict, args: dict):
 
   print_log_status(3)
 
-  print_log_status(3, "Linking `~/.config/obs-studio/basic/scenes`")
+  print_log_status(3, "Copying `~/.config/obs-studio/basic/scenes`")
   copy(f"{CONSTANTS['DOTFILES']}/dotfiles/obs/scenes", f"{CONSTANTS['HOME']}/.config/obs-studio/basic/scenes")
   
   print_log_status(4)

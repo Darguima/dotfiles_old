@@ -9,7 +9,7 @@ def installAndConfigure(CONSTANTS: dict, args: dict):
 
   print_log_status(3)
 
-  print_log_status(3, "Linking `~/.config/GIMP` folder")
+  print_log_status(3, "Copying `~/.config/GIMP` folder")
   copy(f"{CONSTANTS['DOTFILES']}/dotfiles/gimp", f"{CONSTANTS['HOME']}/.config/GIMP")
   
   print_log_status(4)

@@ -17,6 +17,7 @@ def installAndConfigure(CONSTANTS: dict, args: dict):
   run_command("sudo ufw allow 1714:1764/udp") # KDE Connect
   run_command("sudo ufw allow 1714:1764/tcp") # KDE Connect
   run_command("sudo ufw allow 8081") # React Native
+  run_command("sudo ufw allow 22000") # Syncthing
 
   print_log_status(4)
 
